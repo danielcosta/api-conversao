@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/fahrenheit/:valor/celsius', (req, res) => {
 
@@ -34,6 +34,11 @@ app.get('/temperatura/celsiusparafahrenheit/:valor', (req, res) => {
     let valor = req.params.valor;
     let fahrenheit = (valor * 9 / 5) + 32;
     res.json({ "fahrenheit": fahrenheit });
+});
+
+app.get('/api-version', (req, res) => {
+    const version = '1.0.0';
+    res.json({ "version": version, "maquina": os.hostname() });
 });
 
 
